@@ -46,8 +46,6 @@ Noise initialization, 300 iterations
 <img src="https://raw.githubusercontent.com/jtc42/deepart/master/results/chantry-noise-300-it.jpg" width="40%"/>
 </p>
 
-Original image: [San Francisco](https://www.flickr.com/photos/anhgemus-photography/15377047497) by Anh Dinh. All images were released under the Creative Comments license.
-
 Content initialization, 150 iterations
 <p align="center">
 <img src="https://raw.githubusercontent.com/jtc42/deepart/master/images/sanfrancisco.jpg" width="40%"/>
@@ -59,6 +57,7 @@ Noise initialization, 1000 iterations
 <img src="https://raw.githubusercontent.com/jtc42/deepart/master/images/sanfrancisco.jpg" width="40%"/>
 <img src="https://raw.githubusercontent.com/jtc42/deepart/master/results/sanfran-noise-1000-it.jpg" width="40%"/>
 </p>
+Original image: [San Francisco](https://www.flickr.com/photos/anhgemus-photography/15377047497) by Anh Dinh. All images were released under the Creative Comments license.
 
 
 This is an implementation of the original neural style project by [Gatys et al.](https://arxiv.org/abs/1508.06576).
