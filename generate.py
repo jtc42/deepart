@@ -104,10 +104,10 @@ def deepart(content, style, init_noise = False, length = 0, style_weight = 100, 
     )
 
 
+    
+##HANDLE COMMAND LINE ARGUMENTS##
 import optparse
-#deepart(content, style, init_noise = False, length = 0, style_weight = 100, display = 50, max_iter = 350):
 
-# Run demo
 if __name__ == '__main__':
     """
     style_demo = 'images/scream.jpg'
