@@ -36,7 +36,7 @@ def setup_classifier(image_dims):
 
 ##MAIN FUNCTION##
 
-def deepart(content, style, init_noise = False, length = 0, style_weight = 100, display = 50, max_iter = 350):
+def deepart(content, style, init_noise = False, length = 0, style_weight = 1000, display = 50, max_iter = 350):
     """
     content: String - Path to content image
     style: String - Path to style image
@@ -135,7 +135,7 @@ if __name__ == '__main__':
                       )
     parser.add_option('-r','--ratio',
                       dest="style_weight",
-                      default=100,
+                      default=1000,
                       type="int",
                       )
     parser.add_option('-d','--display',
