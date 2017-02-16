@@ -38,8 +38,8 @@ def style_grad(gen_data, target_data):
     loss = np.sum(local_add ** 2) / 4
 
     norm = gen_data.size
-    loss /= norm
-    grad /= norm
+    loss /= norm*1
+    grad /= norm*1
 
     return loss, grad
 
@@ -140,12 +140,6 @@ def get_data_blob(net):
     return net.blobs[net.inputs[0]]
 
 
-def set_data(net, init_img):
-    caffe_in = net.preprocess_inputs([init_img], auto_reshape=True)
-    # Copy image into input blob
-    get_data_blob(net).data[...] = caffe_in
-
-
 class DisplayFunctor():
     def __init__(self, net, root_dir, display):
         self.net = net
@@ -169,21 +163,34 @@ def optimize_img(init_img, solver_type, solver_param, max_iter, display, root_di
                  all_target_blob_names, targets, target_data_list):
     ensuredir(root_dir)
 
+    #Add arguments to solver_param
     solver_param.update({
         'maxiter': max_iter,
         'disp': True,
     })
 
-    # Set initial value and reshape net
-    set_data(net, init_img)
-    x0 = np.ravel(init_img).astype(np.float64)
+    # Set up initial image
+    caffe_in = net.preprocess_inputs([init_img], auto_reshape=True) # Load image
+    get_data_blob(net).data[...] = caffe_in #C opy to input blob
+    
+    # Set up initial conditions from initial image
+    """
+    We do NOT want to pre-process these, as pre-processing re-normalises to match the training model
+    Instead, we get data from init_image, re-arrange to caffe shape, renormalize to -128 -> 128, and ravel
+    """
+    x0 = np.array(init_img) # Load caffe-opened image to a numpy array
+    x0 = [x0[:,:,2], x0[:,:,1], x0[:,:,0]] # Rearrange into shape of a pre-processed image
+    x0 =(np.array([x0])*255.0)-128 # Re-normalise from (0,1) to (-128,128) to match bounds
+    x0 = np.ravel(x0) # Ravel
 
+    # Set up optimizer
     mins = np.full_like(x0, -128)
     maxs = np.full_like(x0, 128)
+    bounds = zip(mins, maxs) # Set up bounds matching x0 normalisation
+    
+    display_func = DisplayFunctor(net, root_dir, display) # Set up display function
 
-    bounds = zip(mins, maxs)
-    display_func = DisplayFunctor(net, root_dir, display)
-
+    # Run optimization
     opt_res = optimize.minimize(
         objective_func,
         x0,
