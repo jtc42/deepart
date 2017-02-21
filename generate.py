@@ -4,6 +4,8 @@ from scipy.ndimage import imread
 from fet_extractor import load_fet_extractor
 from deepart import gen_target_data, optimize_img
 
+import settings
+
 
 # Calculate the size of images to use, based on the input and an optional width
 def calculate_shape(image, length=0):
@@ -17,7 +19,7 @@ def calculate_shape(image, length=0):
 def setup_classifier(image_dims):
 
     #Update to your model path if already elsewhere
-    model_path = 'models/VGG_CNN_19/'
+    model_path = settings.MODEL_PATH
 
     deployfile_relpath = model_path + 'VGG_ILSVRC_19_layers_deploy_fullconv.prototxt'
     weights_relpath = model_path + 'vgg_normalised.caffemodel'

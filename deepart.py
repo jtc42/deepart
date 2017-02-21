@@ -169,10 +169,6 @@ def optimize_img(init_img, solver_type, solver_param, max_iter, display, root_di
         'disp': True,
     })
 
-    # Set up initial image
-    caffe_in = net.preprocess_inputs([init_img], auto_reshape=True) # Load image
-    get_data_blob(net).data[...] = caffe_in #C opy to input blob
-    
     # Set up initial conditions from initial image
     """
     We do NOT want to pre-process these, as pre-processing re-normalises to match the training model
