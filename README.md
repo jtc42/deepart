@@ -6,7 +6,7 @@ Modification of kovibalu's implementation of neural style transfer. This version
 
 Run `./scripts/install/install_all.sh` to install. It will install the needed python dependencies, caffe, compile caffe, download the necessary weight file. If running Windows, ensure all dependencies are installed, download the pre-trained network from [here](http://bethgelab.org/media/uploads/deeptextures/vgg_normalised.caffemodel), and place the file in 'models/VGG_CNN_19/'.
 
-If you already have the normalized VGG19 files stored elsewhere, edit 'generate.py' variable 'model_path' to reflect this.
+If you already have the normalized VGG19 files stored elsewhere, edit 'settings.py' variable 'MODEL_PATH' to reflect this.
 
 Once everything is installed, run 'python generate.py' from command prompt/terminal to run a demo. Results will be saved to '/results'.
 
