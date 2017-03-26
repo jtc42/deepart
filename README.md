@@ -2,7 +2,7 @@
 
 Modification of kovibalu's implementation of neural style transfer. This versions adds the ability to use the content image as the initialisation image, giving results better matching the content, in fewer iterations. I've also implemented functionality to pass arguments through the command line, saving modification of the .py files.
 
-##Getting started
+## Getting started
 
 Run `./scripts/install/install_all.sh` to install. It will install the needed python dependencies, caffe, compile caffe, download the necessary weight file. If running Windows, ensure all dependencies are installed, download the pre-trained network from [here](http://bethgelab.org/media/uploads/deeptextures/vgg_normalised.caffemodel), and place the file in 'models/VGG_CNN_19/'.
 
@@ -10,7 +10,10 @@ If you already have the normalized VGG19 files stored elsewhere, edit 'settings.
 
 Once everything is installed, run 'python generate.py' from command prompt/terminal to run a demo. Results will be saved to '/results'.
 
-##Using the script
+### A note on Python versions (for myself mainly)
+This code was originally written for Python 2.7, however to the best of my knowledge, it is fully compatible with Python 3. At the time of writing (March 2017), [Caffe for Windows](https://github.com/BVLC/caffe/tree/windows) supports Python 2.7 and 3.5 only. Installing the Python 3.5 versions should work with this code just fine. However, if you're running Python 3.6+ Caffe will fail to build/import. If Caffe is ported to Python 3.6, this should work.
+
+## Using the script
 
 ```
 python generate.py -c <content image> -s <style image> -l <width of image> -i <n iterations>
@@ -18,7 +21,7 @@ python generate.py -c <content image> -s <style image> -l <width of image> -i <n
 If no image width is specified, the dimensions of the content image will be used, so be careful if running on limited VRAM.
 Similarly, if no iteration number is specified it will default to 300. This gives good results when initialising with content, but when initialising with noise I suggest increasing this to at least 500.
 
-###Additional arguments
+### Additional arguments
 ```
 -n <True/False>
 ``` 
